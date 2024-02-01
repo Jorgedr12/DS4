@@ -1,4 +1,4 @@
-from Atleta import Athelete
+from Clases.Athlete import Athelete
 from Sport import Sport
 from Team import Team
 
