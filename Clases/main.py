@@ -39,7 +39,7 @@ def procesa_diccionario(diccionario:dict):
     for k1,v1 in diccionario.items():
         print(f"key:{k1}")
         for k2,v2 in v1.items():
-            print(f"key:{k2}")
+            print(f"key2:{k2}")
 
 if __name__ == "__main__":
     main()
