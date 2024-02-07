@@ -3,10 +3,10 @@ Lógica del programa del gato
 '''
 import random
 import board
+import os
 
 tablero = [x for x in range(0,9)] #0,1,2,3...8
 tab_dict= {x:str(x) for x in tablero}
-tab_dict = {"0":"0","1":"1","2":"2","3":"3","4":"4","5":"5","6":"6","7":"7","8":"8"}
 
 def display_tablero(tab:dict):
     print(f" {tab[0]} | {tab[1]} | {tab[2]} ")
@@ -22,7 +22,7 @@ def ia(board:dict):
         if board[r] == str(r): # Si está libre
             board[r] = "O"
             ocuppied = False
-            
+
 def juega_usuario(tab):
     turno_correcto = False
     usuario = input("Escoja celda:")
@@ -40,13 +40,6 @@ def check_winner(tab,lista_lineas):
     for cmb in lista_lineas:
         if tab[cmb[0]]==tab[cmb[1]]==tab[cmb[2]]:
             return True
-    return False
-
-def combinacion_ganadora(tab,lista_lineas):
-    for cmb in lista_lineas:
-        if tab[cmb[0]]==tab[cmb[1]]==tab[cmb[2]]:
-            print(f"La combinación ganadora es {cmb}")
-            return cmb
     return False
 
 def game(tab:dict):
@@ -68,51 +61,25 @@ def game(tab:dict):
         if correcto:
             turnos +=1
             gana = check_winner(tab,lista_combinaciones)
+            board.display_tablero(tab)
             if gana == True:
                 diccionario['ganador'] = "Jugador/a"
-                print="¡Ganaste!"
+                print("¡El ganador de la partida fue Jugador/a 1!")
+                break
+            if turnos == 9:
                 break
             ia(tab)
+            board.display_tablero(tab)
             gana = check_winner(tab,lista_combinaciones)
             if gana == True:
-                diccionario['ganador'] = 'IA'
-                print("¡Ganó la IA!")
+                diccionario['ganador'] = "Computadora"
+                print("¡El ganador de la partida fue la computadora!")
                 break
-            turnos += 1
-    board.display_tablero(tab)
-    combinacion_ganadora(tab,lista_combinaciones)
+            turnos +=1
     return diccionario
-    
-lista_combinaciones = [
-        [0,1,2],
-        [3,4,5],
-        [6,7,8],
-        [0,3,6],
-        [1,4,7],
-        [2,5,8],
-        [0,4,8],
-        [2,4,6]
-    ]
-def display_score(s:dict,d:dict):
-    if d['ganador'] != '':
-        print(f"El ganador fue {d['ganador']}")
-        s[d['ganador']] +=1
-    else:
-        print("¡Empate!")
-        s['Empates'] +=1
-    print(f"<<Jugador:{s['Jugador/a']}>> <<IA:{s['IA']}>> <<Empates:{s['Empates']}>>")
 
-def jugar_otra_vez():
-    jugar = True
-    otra_vez = input("¿Quieres jugar otra vez? (S/N)")
-    otra_vez = otra_vez.upper()
-    if (otra_vez != 'S'):
-        juga = False
-        print("¡Gracias por jugar!")
-    return jugar
-        
-def two_player_game():
-    tab_dict= {x:str(x) for x in tablero}
+
+def game2(tab:dict):
     diccionario = {'ganador':''}
     lista_combinaciones = [
         [0,1,2],
@@ -125,49 +92,65 @@ def two_player_game():
         [2,4,6]
     ]
     turnos = 0
-    while turnos <16:
-        board.display_tablero(tab_dict)
-        correcto = board.juega_usuario1(tab_dict)
+    while turnos <9:
+        board.display_tablero(tab)
+        correcto = board.juega_usuario1(tab)
         if correcto:
             turnos +=1
-            gana = check_winner(tab_dict,lista_combinaciones)
+            gana = check_winner(tab,lista_combinaciones)
             if gana == True:
-                diccionario['ganador'] = "Jugador/a"
-                print="¡Ganaste!"
+                diccionario['ganador'] = "Jugador/a 1"
+                print("¡El ganador de la partida fue Jugador/a 1!")
                 break
-            board.display_tablero(tab_dict)
-            correcto = board.juega_usuario2(tab_dict)
-            if correcto:
-                turnos +=1
-                gana = check_winner(tab_dict,lista_combinaciones)
-                if gana == True:
-                    diccionario['ganador'] = "Jugador/a"
-                    print="¡Ganaste!"
-                    break
-                turnos += 1
-    board.display_tablero(tab_dict)
-    combinacion_ganadora(tab_dict,lista_combinaciones)
+            board.display_tablero(tab)
+            if turnos == 9:
+                break
+            board.juega_usuario2(tab)
+            gana = check_winner(tab,lista_combinaciones)
+            if gana == True:
+                diccionario['ganador'] = "Jugador/a 2"
+                print("¡El ganador de la partida fue Jugador/a 2!")
+                break
+            turnos += 1
+    board.display_tablero(tab)
     return diccionario
 
+def jugar_otra_vez():
+        jugar = True
+        otra_vez = input("¿Quieres jugar otra vez? (S/N)")
+        otra_vez = otra_vez.upper()
+        if (otra_vez != 'S'):
+            jugar = False
+            print("¡Gracias por jugar!")
+        else:
+            os.system('clear') # Limpiar la pantalla
+        return jugar
+
 def game_cycle():
-    score = {'Jugador/a':0, 'IA':0, 'Empates':0}
+    score = {'Jugador/a':0, 'Computadora':0, 'Empates':0}
+    score2 = {'Jugador/a 1':0, 'Jugador/a 2':0, 'Empates':0}
     continuar = True
+    
+    # Reiniciar el tablero al inicio de cada ciclo de juego
+    tab_dict = {x:str(x) for x in tablero}
+    
+    # Cuantos jugadores van a ser?
+    jugadores = input("¿Cuántos jugadores seran? (1/2)")
     while continuar:
-        #iniciamos el tablero
-        tab_dict= {x:str(x) for x in tablero}
-        # Cuantos jugadores van a ser?
-        jugadores = input("¿Cuántos jugadores seran? (1/2)")
+        tab_dict = {x:str(x) for x in tablero}  # Reiniciar el tablero
         if jugadores == '1':
             d = game(tab_dict)
-            display_score(score,d)
+            board.display_score(score,d)
             continuar = jugar_otra_vez()
         elif jugadores == '2':
-            two_player_game()
+            d = game2(tab_dict)
+            board.display_score2(score2,d)
             continuar = jugar_otra_vez()
         else:
             print("Opción no válida")
             game_cycle()
-            
 
+        
+            
 if __name__ == "__main__":
     game_cycle()
