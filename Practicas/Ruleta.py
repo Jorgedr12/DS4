@@ -1,5 +1,5 @@
 # Hacer que el usuario pueda ingresar varios datos, que se guarden en una lista y que se haga un sorteo aleatorio de los datos ingresados.
-import random
+import random as rd
 
 def datos():
     Lista = []
@@ -10,11 +10,9 @@ def datos():
         else:
             Lista.append(dato)
             
-            
-def sorteo(Lista):
-    print(random.choice(Lista))
+    Lista.sort()
+    print(Lista)
 
 
 if __name__ == "__main__":
-    datos = datos()
-    sorteo(datos)
+    datos()

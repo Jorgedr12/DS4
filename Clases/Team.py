@@ -20,7 +20,10 @@ class Team:
         return {"name":self.name, "sport":self.sport.to_json(),
                 "players": [p.name for p in self.players]
                 }
-
+    def __repr__(self) -> str:
+        return f"Team('{self.name}','{self.players}','{self.sport}')"
+        
+        
 if __name__ == "__main__":
     a = Athlete("Chicharito")
     b = Athlete("Piojo Alvarado")
