@@ -19,7 +19,9 @@ class Sport:
         return return_string
     
     def to_json(self) -> dict:
-        return_dict = {'name':self.name,'num_players':self.num_players,'league':self.league}
+        return_dict = {'name':self.name, 
+                       'num_players':self.num_players,
+                       'league':self.league}
         return return_dict
     
 if __name__ == "__main__":
