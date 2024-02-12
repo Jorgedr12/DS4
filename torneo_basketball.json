@@ -1,0 +1,49 @@
+{"Chicago Bulls": 
+{"name": "Chicago Bulls", 
+"sport": {"name": "Basketball", 
+"num_players": 5, 
+"league": "NBA"}, 
+"players": ["Michael Jordan", "Scottie Pippen", "Dennis Rodman", "Steve Kerr", "Luc Longley"]}, 
+"Los Angeles Lakers": 
+{"name": "Los Angeles Lakers",
+"sport": {"name": "Basketball", 
+"num_players": 5, 
+"league": "NBA"}, 
+"players": ["Magic Johnson", "Kareem Abdul-Jabbar", "Shaquille O'Neal", "Kobe Bryant", "LeBron James"]},
+"San Antonio Spurs": 
+{"name": "San Antonio Spurs",
+"sport": {"name": "Basketball",
+"num_players": 5,
+"league": "NBA"},
+"players": ["Tim Duncan", "David Robinson", "Tony Parker", "Manu Ginóbili", "Kawhi Leonard"]},
+"Boston Celtics": 
+{"name": "Boston Celtics",
+"sport": {"name": "Basketball",
+"num_players": 5,
+"league": "NBA"},
+"players": ["Bill Russell", "Larry Bird", "Paul Pierce", "Kevin Garnett", "Ray Allen"]},
+"Oklahoma City Thunder": 
+{"name": "Oklahoma City Thunder",
+"sport": {"name": "Basketball",
+"num_players": 5,
+"league": "NBA"},
+"players": ["Gary Payton", "Shawn Kemp", "Kevin Durant", "Russell Westbrook", "James Harden"]},
+"Miami Heat": 
+{"name": "Miami Heat",
+"sport": {"name": "Basketball",
+"num_players": 5,
+"league": "NBA"},
+"players": ["Dwyane Wade", "Alonzo Mourning", "LeBron James", "Chris Bosh", "Shaquille O'Neal"]},
+"Dallas Mavericks": 
+{"name": "Dallas Mavericks",
+"sport": {"name": "Basketball",
+"num_players": 5,
+"league": "NBA"},
+"players": ["Dirk Nowitzki", "Jason Kidd", "Steve Nash", "Michael Finley", "Mark Aguirre"]},
+"New York Knicks": 
+{"name": "New York Knicks",
+"sport": {"name": "Basketball",
+"num_players": 5,
+"league": "NBA"},
+"players": ["Patrick Ewing", "Walt Frazier", "Willis Reed", "Carmelo Anthony", "Bernard King"]}
+}
