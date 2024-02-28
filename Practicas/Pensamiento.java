@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 public class Pensamiento {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Mi Frame");
-        frame.setSize(300, 250);
+        frame.setSize(300, 200);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
         frame.setLayout(null);
