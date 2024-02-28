@@ -1,5 +1,5 @@
 import csv
-import os
+import os 
 import argparse
 
 
@@ -8,12 +8,15 @@ class Revista:
         self.titulo = titulo
         self.catalogos = set()
         self.catalogos.add(catalogo)
+        self.area=set()
     
     def __str__(self):
-        return f'{self.titulo} - {self.catalogos}'
+        return f'{self.titulo} - {self.catalogos} - {self.area}'
 
     def __repr__(self):
-        return f'{self.titulo} - {self.catalogos}'
+        return f'{self.titulo} - {self.catalogos} - {self.area}'
+    def setArea(self,area:str):
+        self.area.add(area)
 
 def read_folder(folder_path:str) -> list:
     return os.listdir(folder_path)
@@ -28,19 +31,44 @@ def read_csv(file_path:str) -> list:
 
 def main(folder:str):
     files_list = read_folder(folder)
-    files_list = [file for file in files_list if file.endswith(".csv")]
+    files_list = [file for file in files_list if file.endswith('.csv')]
     catalogo_list = extract_left_of_underscore(files_list)
     print(catalogo_list)
     lista_revistas = []
-    for file in files_list:
-        titulos = read_csv(os.path.join(folder,file))
-        lista_revistas.append(titulos)
-    print(lista_revistas)
-    
-    
+    diccionario = {}
+    for files in files_list:
+        filename = os.path.join(folder,files)
+        titulos = read_csv(filename) #leyendo los titulos
+        catalogo = files.split("_")[0] #extraemos nombre del catalogo
+        for titulo in titulos:
+            titulo = titulo[0]
+            titulo = titulo.lower()
+            revista = Revista(titulo,catalogo)
+            #agregar revista al diccionario
+            agregar_revista_diccionario(diccionario,revista)
+    print(f"Número de llaves en diccionario:{len(diccionario.keys())}")
+    print(f"Revista 'acta':",diccionario['acta'])
+
+def agregar_revista_diccionario(dic:dict,revista:Revista):
+    titulo = revista.titulo
+    lista_palabras = titulo.split(" ")
+    lista_palabras.append(titulo)
+    for palabra in lista_palabras:
+        if palabra not in dic:
+            dic[palabra] = [revista]
+        else:
+            dic[palabra].append(revista)
+
+        
+
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Proccesa archivos csv y genera catalogo')
-    parser.add_argument('folder_path',type=str,help='Ruta de la carpeta con archivos csv')
+    parser = argparse.ArgumentParser(
+        description='Procesa archivos csv y genera catálogo'
+    )
+    parser.add_argument('folder_path',
+                        type=str,
+                        help='Ruta de la carpeta con csvs'
+                        )
     args = parser.parse_args()
     folder_path = args.folder_path
     print(folder_path)
