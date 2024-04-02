@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <title>Ahorcado</title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <h1>{{abecedario}}</h1>
+                
+                {{existence}}
+                {{fin}}
+            </div>
+            <div>
+                <img src="{{imagen}}" alt="Ahorcado" />
+                
+            </div>
+            <div>
+                {%- for val in lista_pal %}
+                    {%-for keys in val %}
+                        {{val[keys]}}
+                    {%-endfor%}
+                {%- endfor %}
+            </div>
+            <div>
+                <form action="{{request.base_url}}" method="post">
+                    <h3>Letra:</h3> <br>
+                    {% from "dropdown.html" import dropdown %}
+                    {{ dropdown('valor', lista_abc) }}
+                    <button type="submit">Enviar</button>
+                    
+                </form>
+        </div>
+
+    </body>
+
+</html>
