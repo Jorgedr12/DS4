@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        {% block head %}
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %} {% endblock %}</title>
+        {% endblock %}
+        <link rel="stylesheet" href="/static/estilo.css">
+    </head>
+    <body class = "bloque">
+        <div>
+            <div><a href="/" class"liga">Inicio</a></div>
+            <div><a href="/generos">Genero</a></div>
+            <div><a href="/anio">Años</a></div>
+            <div><a href="/alfabetico">Alfabético</a></div>
+        </div>
+        {% block body %}
+        {% endblock %}
+    </body>
+    <footer>
+        {% block footer %}
+        <div>CONEMOVIE (C) 2024 Todos los derechos reservados</div>
+        {% endblock %}
+    </footer>
+</html>
